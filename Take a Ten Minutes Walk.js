@@ -9,23 +9,19 @@
 
 // # Решение:
 
-function isValidWalk(walk) {
-  let step = [0, 0];
-  for (let i = 0; i < walk.length; i++) {
-    if (walk.length > 10) {
-      return false;
-    }
-    if (walk[i] === 'n') {
-      step[0]++;
-    } else if (walk[i] === 's') {
-      step[0]--;
-    } else if (walk[i] === 'e') {
-      step[1]++;
-    } else if (walk[i] === 'w') {
-      step[1]--;
-    }
+function order(words) {
+  if (words.length < 1) {
+    return '';
   }
-  return step[0] === 0 && step[1] === 0 && walk.length === 10 ? true : false;
+  const regex = /[1-9]/g;
+  const numbers = words.match(regex);
+  const separateWords = words.split(' ');
+  let res = Object.assign(
+    ...numbers.map((item, index) => ({ [item]: separateWords[index] }))
+  );
+  return Object.entries(res)
+    .map((item) => item[1])
+    .join(' ');
 }
 
 // # Комментарии:
